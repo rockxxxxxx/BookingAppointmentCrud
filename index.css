@@ -1,0 +1,54 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    text-align: center;
+    background-color: #283149;
+}
+
+h1 {
+    font-size: 5rem;
+    color: #DBEDF3;
+    font-family: "Arvo", cursive;
+    text-shadow: 3px 0 #DA0463;
+
+}
+
+footer {
+    color: #DBEDF3;
+    font-family: sans-serif;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+hr {
+    border: 2px solid #DBEDF3;
+    width: 50%;
+    margin: 0px auto 30px auto;
+
+}
+
+label {
+
+    color: #DBEDF3;
+}
+
+.form-control {
+    margin-right: 50px;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+th,
+tr {
+    color: #DBEDF3;
+    text-align: left;
+}

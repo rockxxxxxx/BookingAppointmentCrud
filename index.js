@@ -1,6 +1,5 @@
 window.addEventListener("DOMContentLoaded", getData);
 document.getElementById("submit").addEventListener("click", getSend);
-document.getElementById("show").addEventListener("click", getData);
 
 var x = document.createElement("TBODY");
 
@@ -15,29 +14,45 @@ function getSend() {
 
   axios
     .post(
-      "https://crudcrud.com/api/81dda1eabde44a3a8f7b80b965615739/appointmentData",
+      "https://crudcrud.com/api/985dfeb3f37640ab8db9da80a54feb02/appointmentData",
       obj
     )
     .then(getData())
     .catch((err) => console.log(err));
 }
+const ul = document.getElementById("data");
 
 function getData() {
   axios
     .get(
-      "https://crudcrud.com/api/81dda1eabde44a3a8f7b80b965615739/appointmentData"
+      "https://crudcrud.com/api/985dfeb3f37640ab8db9da80a54feb02/appointmentData"
     )
     .then(function (res) {
       for (let i = 0; i < res.data.length; i++) {
-        var y = document.createElement("TR");
-        var z2 = document.createElement("TD");
-        var z1 = document.createElement("TD");
-        z1.innerHTML = res.data[i].email;
-        z2.innerHTML = res.data[i].name;
-        y.append(z1, z2);
-        x.appendChild(y);
-
-        document.getElementById("tbl").appendChild(x);
+        var li = document.createElement("li");
+        var email = document.createTextNode(`${res.data[i].email}, `);
+        var name = document.createTextNode(`${res.data[i].name}`);
+        var del = document.createElement("button");
+        var edit = document.createElement("button");
+        del.innerHTML = "Delete";
+        edit.innerHTML = "Edit";
+        del.setAttribute("onclick", `Delete('${res.data[i]._id}')`);
+        edit.setAttribute("onclick", `Edit('${res.data[i]._id}')`);
+        li.setAttribute("id", `${res.data[i]._id}`);
+        li.append(email, name, del, edit);
+        ul.appendChild(li);
       }
     });
+}
+
+function Delete(id) {
+  axios
+    .delete(
+      `https://crudcrud.com/api/985dfeb3f37640ab8db9da80a54feb02/appointmentData/${id}`
+    )
+    .then(() => document.getElementById(`${id}`).remove())
+    .catch(() => alert("Something went wrong"));
+}
+function Edit(id) {
+  console.log(id);
 }
